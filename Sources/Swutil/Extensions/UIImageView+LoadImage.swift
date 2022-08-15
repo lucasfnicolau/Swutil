@@ -71,23 +71,29 @@ public extension UIImageView {
             return
         }
 
-        let activityIndicatorView = build(UIActivityIndicatorView()) {
-            $0.translatesAutoresizingMaskIntoConstraints = false
+        var activityIndicatorView: UIActivityIndicatorView?
+
+        DispatchQueue.main.async {
+            activityIndicatorView = build(UIActivityIndicatorView()) {
+                $0.translatesAutoresizingMaskIntoConstraints = false
+            }
+            if let activityIndicatorView = activityIndicatorView {
+                self.addSubview(activityIndicatorView)
+                activityIndicatorView.startAnimating()
+                activityIndicatorView.center(to: self)
+            }
         }
-        addSubview(activityIndicatorView)
-        activityIndicatorView.startAnimating()
-        activityIndicatorView.center(to: self)
 
         URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
             guard let data = data, error == nil else {
                 DispatchQueue.main.async {
-                    activityIndicatorView.removeFromSuperview()
+                    activityIndicatorView?.removeFromSuperview()
                     self?.setFallbackImage(fallbackImage)
                 }
                 return
             }
             DispatchQueue.main.async {
-                activityIndicatorView.removeFromSuperview()
+                activityIndicatorView?.removeFromSuperview()
                 if let image = UIImage(data: data) {
                     self?.image = image
                     ImageCache.shared.setObject(image, forKey: NSString(string: url.absoluteString))

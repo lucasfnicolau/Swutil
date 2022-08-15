@@ -9,6 +9,6 @@ import UIKit
 
 public struct SharedAssets {
     public struct Image {
-        public static let defaultPlaceholder = UIImage(named: "default-placeholder")
+        public static let defaultPlaceholder = UIImage(named: "default-placeholder", in: Bundle.module, compatibleWith: nil)
     }
 }
