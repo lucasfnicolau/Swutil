@@ -29,7 +29,7 @@ public class ImageCache {
 }
 
 // Extension to help loading images from the internet.
-extension UIImageView {
+public extension UIImageView {
 
     struct FallbackImage {
         public let image: UIImage?
