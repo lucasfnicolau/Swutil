@@ -21,7 +21,7 @@ public extension UIView {
     ///   - anchor: The layout anchor to be used as reference.
     ///   - constant: A custom constant to be used in the constraints.
     ///   - distance: Enum controlling if the constraint should be equalTo, lessThanOrEqualTo or greaterThanOrEqualTo the anchor.
-    func constraintTop(to anchor: NSLayoutAnchor<NSLayoutYAxisAnchor>, constant: CGFloat = .zero, distance: ConstraintDistance = .equalTo) -> Self {
+    func top(to anchor: NSLayoutAnchor<NSLayoutYAxisAnchor>, constant: CGFloat = .zero, distance: ConstraintDistance = .equalTo) -> Self {
         switch distance {
         case .equalTo:
             self.topAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
@@ -39,7 +39,7 @@ public extension UIView {
     ///   - anchor: The layout anchor to be used as reference.
     ///   - constant: A custom constant to be used in the constraints.
     ///   - distance: Enum controlling if the constraint should be equalTo, lessThanOrEqualTo or greaterThanOrEqualTo the anchor.
-    func constraintLeading(to anchor: NSLayoutAnchor<NSLayoutXAxisAnchor>, constant: CGFloat = .zero, distance: ConstraintDistance = .equalTo) -> Self {
+    func leading(to anchor: NSLayoutAnchor<NSLayoutXAxisAnchor>, constant: CGFloat = .zero, distance: ConstraintDistance = .equalTo) -> Self {
         switch distance {
         case .equalTo:
             self.leadingAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
@@ -57,7 +57,7 @@ public extension UIView {
     ///   - anchor: The layout anchor to be used as reference.
     ///   - constant: A custom constant to be used in the constraints.
     ///   - distance: Enum controlling if the constraint should be equalTo, lessThanOrEqualTo or greaterThanOrEqualTo the anchor.
-    func constraintTrailing(to anchor: NSLayoutAnchor<NSLayoutXAxisAnchor>, constant: CGFloat = .zero, distance: ConstraintDistance = .equalTo) -> Self {
+    func trailing(to anchor: NSLayoutAnchor<NSLayoutXAxisAnchor>, constant: CGFloat = .zero, distance: ConstraintDistance = .equalTo) -> Self {
         switch distance {
         case .equalTo:
             self.trailingAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
@@ -75,7 +75,7 @@ public extension UIView {
     ///   - anchor: The layout anchor to be used as reference.
     ///   - constant: A custom constant to be used in the constraints.
     ///   - distance: Enum controlling if the constraint should be equalTo, lessThanOrEqualTo or greaterThanOrEqualTo the anchor.
-    func constraintBottom(to anchor: NSLayoutAnchor<NSLayoutYAxisAnchor>, constant: CGFloat = .zero, distance: ConstraintDistance = .equalTo) -> Self {
+    func bottom(to anchor: NSLayoutAnchor<NSLayoutYAxisAnchor>, constant: CGFloat = .zero, distance: ConstraintDistance = .equalTo) -> Self {
         switch distance {
         case .equalTo:
             self.bottomAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
@@ -91,7 +91,7 @@ public extension UIView {
     /// Constraint the current view centerY and centerX anchors with the anchor received by parameter.
     /// - Parameters:
     ///   - view: The view to be used as reference.
-    func constraintCenter(to view: UIView) -> Self {
+    func center(to view: UIView) -> Self {
         self.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         self.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         return self
@@ -102,7 +102,7 @@ public extension UIView {
     /// - Parameters:
     ///   - view: The view to be used as reference.
     ///   - constant: A custom constant to be used in the constraints.
-    func constraintCenterY(to view: UIView, constant: CGFloat = .zero) -> Self {
+    func centerY(to view: UIView, constant: CGFloat = .zero) -> Self {
         self.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: constant).isActive = true
         return self
     }
@@ -112,7 +112,7 @@ public extension UIView {
     /// - Parameters:
     ///   - view: The view to be used as reference.
     ///   - constant: A custom constant to be used in the constraints.
-    func constraintCenterX(to view: UIView, constant: CGFloat = .zero) -> Self {
+    func centerX(to view: UIView, constant: CGFloat = .zero) -> Self {
         self.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: constant).isActive = true
         return self
     }
@@ -146,7 +146,7 @@ public extension UIView {
     /// Constraint the height and width anchors with the specified CGSize value.
     /// - Parameters:
     ///   - size: The size be used as the constraint constant.
-    func constraintSize(to size: CGSize) -> Self {
+    func size(to size: CGSize) -> Self {
         self.widthAnchor.constraint(equalToConstant: size.width).isActive = true
         self.heightAnchor.constraint(equalToConstant: size.height).isActive = true
         return self
@@ -156,7 +156,7 @@ public extension UIView {
     /// Constraint the height and width anchors with the specified CGFloat value.
     /// - Parameters:
     ///   - constant: The value to be used as the constraint constant.
-    func constraintSize(to constant: CGFloat) -> Self {
+    func size(to constant: CGFloat) -> Self {
         self.widthAnchor.constraint(equalToConstant: constant).isActive = true
         self.heightAnchor.constraint(equalToConstant: constant).isActive = true
         return self
@@ -166,7 +166,7 @@ public extension UIView {
     /// Constraint the widthAnchor with the specified CGFloat value.
     /// - Parameters:
     ///   - constant: The value be used as the constraint constant.
-    func constraintWidth(to constant: CGFloat) -> Self {
+    func width(to constant: CGFloat) -> Self {
         self.widthAnchor.constraint(equalToConstant: constant).isActive = true
         return self
     }
@@ -175,7 +175,7 @@ public extension UIView {
     /// Constraint the widthAnchor with the specified anchor.
     /// - Parameters:
     ///   - anchor: The layout anchor to be used as reference.
-    func constraintWidth(to anchor: NSLayoutAnchor<NSLayoutDimension>) -> Self {
+    func width(to anchor: NSLayoutAnchor<NSLayoutDimension>) -> Self {
         self.widthAnchor.constraint(equalTo: anchor).isActive = true
         return self
     }
@@ -185,7 +185,7 @@ public extension UIView {
     /// - Parameters:
     ///   - anchor: The layout anchor to be used as reference.
     ///   - multiplier: Factor value to be applied to the constraint.
-    func constraintWidth(to anchor: NSLayoutDimension, multiplier: CGFloat = 1.0) -> Self {
+    func width(to anchor: NSLayoutDimension, multiplier: CGFloat = 1.0) -> Self {
         self.widthAnchor.constraint(equalTo: anchor, multiplier: multiplier).isActive = true
         return self
     }
@@ -194,7 +194,7 @@ public extension UIView {
     /// Constraint the heightAnchor with the specified CGFloat value.
     /// - Parameters:
     ///   - constant: The value be used as the constraint constant.
-    func constraintHeight(to constant: CGFloat) -> Self {
+    func height(to constant: CGFloat) -> Self {
         self.heightAnchor.constraint(equalToConstant: constant).isActive = true
         return self
     }
@@ -203,7 +203,7 @@ public extension UIView {
     /// Constraint the heightAnchor with the specified anchor.
     /// - Parameters:
     ///   - anchor: The layout anchor to be used as reference.
-    func constraintHeight(to anchor: NSLayoutAnchor<NSLayoutDimension>) -> Self {
+    func height(to anchor: NSLayoutAnchor<NSLayoutDimension>) -> Self {
         self.heightAnchor.constraint(equalTo: anchor).isActive = true
         return self
     }
@@ -213,7 +213,7 @@ public extension UIView {
     /// - Parameters:
     ///   - anchor: The layout anchor to be used as reference.
     ///   - multiplier: Factor value to be applied to the constraint.
-    func constraintHeight(to anchor: NSLayoutDimension, multiplier: CGFloat = 1.0) -> Self {
+    func height(to anchor: NSLayoutDimension, multiplier: CGFloat = 1.0) -> Self {
         self.heightAnchor.constraint(equalTo: anchor, multiplier: multiplier).isActive = true
         return self
     }
