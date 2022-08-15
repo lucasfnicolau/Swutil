@@ -10,14 +10,14 @@ import UIKit
 /// ImageCache to handle image caching, avoiding the need to download previous images again.
 /// It's possible to use a shared instance or to create a new one.
 public class ImageCache {
-    static let shared = ImageCache()
+    public static let shared = ImageCache()
     private let cache = NSCache<NSString, UIImage>()
     private lazy var queue = DispatchQueue(label: String(describing: Self.self),
                                            attributes: .concurrent)
 
-    func object(forKey key: NSString) -> UIImage? {
-        queue.sync(flags: .barrier) { [weak self] in
-            return self?.cache.object(forKey: key)
+    func object(forKey key: NSString, completion: @escaping (UIImage?) -> Void) {
+        queue.async(flags: .barrier) { [weak self] in
+            completion(self?.cache.object(forKey: key))
         }
     }
 
@@ -64,36 +64,38 @@ public extension UIImageView {
             return
         }
 
-        if let cachedImage = ImageCache.shared.object(forKey: NSString(string: url.absoluteString)) {
-            DispatchQueue.main.async {
-                self.image = cachedImage
+        ImageCache.shared.object(forKey: NSString(string: url.absoluteString)) { cachedImage in
+            if let cachedImage = cachedImage {
+                DispatchQueue.main.async {
+                    self.image = cachedImage
+                }
+                return
             }
-            return
         }
 
         var activityIndicatorView: UIActivityIndicatorView?
-
         DispatchQueue.main.async {
             activityIndicatorView = build(UIActivityIndicatorView()) {
                 $0.translatesAutoresizingMaskIntoConstraints = false
             }
-            if let activityIndicatorView = activityIndicatorView {
-                self.addSubview(activityIndicatorView)
-                activityIndicatorView.startAnimating()
-                activityIndicatorView.center(to: self)
-            }
+            guard let activityIndicatorView = activityIndicatorView else { return }
+            self.addSubview(activityIndicatorView)
+            activityIndicatorView.startAnimating()
+            activityIndicatorView.center(to: self)
         }
 
         URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
             guard let data = data, error == nil else {
                 DispatchQueue.main.async {
                     activityIndicatorView?.removeFromSuperview()
+                    activityIndicatorView = nil
                     self?.setFallbackImage(fallbackImage)
                 }
                 return
             }
             DispatchQueue.main.async {
                 activityIndicatorView?.removeFromSuperview()
+                activityIndicatorView = nil
                 if let image = UIImage(data: data) {
                     self?.image = image
                     ImageCache.shared.setObject(image, forKey: NSString(string: url.absoluteString))
