@@ -75,6 +75,7 @@ public extension UIImageView {
 
         var activityIndicatorView: UIActivityIndicatorView?
         DispatchQueue.main.async {
+            self.image = nil
             activityIndicatorView = build(UIActivityIndicatorView()) {
                 $0.translatesAutoresizingMaskIntoConstraints = false
             }
