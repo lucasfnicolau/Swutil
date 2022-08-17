@@ -26,6 +26,7 @@ public extension UIImageView {
     ///   - urlAddress: The desired URL address (String).
     ///   - fallbackImage: The fallback image to be used if the desired image is not downloaded.
     func loadImage(from urlAddress: String, fallbackImage: FallbackImage = .init()) {
+        URLSessionDataTaskHandler.shared.sessions[hash]?.cancel()
         guard let url = URL(string: urlAddress) else {
             setFallbackImage(fallbackImage)
             return
@@ -38,6 +39,7 @@ public extension UIImageView {
     ///   - url: The desired URL.
     ///   - fallbackType: The fallback image to be used if the desired image is not downloaded.
     func loadImage(from url: URL?, fallbackImage: FallbackImage = .init()) {
+        URLSessionDataTaskHandler.shared.sessions[hash]?.cancel()
         guard let url = url else {
             setFallbackImage(fallbackImage)
             return
@@ -51,7 +53,7 @@ public extension UIImageView {
         }
 
         startLoading { [weak self] activityIndicatorView in
-            URLSession.shared.dataTask(with: url) { [weak self, weak activityIndicatorView] data, _, error in
+            let task = URLSession.shared.dataTask(with: url) { [weak self, weak activityIndicatorView] data, _, error in
                 guard let data = data, error == nil else {
                     self?.stopLoading(&activityIndicatorView)
                     self?.setFallbackImage(fallbackImage)
@@ -65,7 +67,9 @@ public extension UIImageView {
                 } else {
                     self?.setFallbackImage(fallbackImage)
                 }
-            }.resume()
+            }
+            URLSessionDataTaskHandler.shared.sessions[self?.hash ?? .zero] = task
+            task.resume()
         }
     }
 
