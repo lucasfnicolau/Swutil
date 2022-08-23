@@ -25,27 +25,39 @@ public extension UIImageView {
     /// - Parameters:
     ///   - urlAddress: The desired URL address (String).
     ///   - fallbackImage: The fallback image to be used if the desired image is not downloaded.
-    func loadImage(from urlAddress: String, fallbackImage: FallbackImage = .init()) {
-        URLSessionDataTaskHandler.shared.sessions[hash]?.cancel()
+    ///   - tasksManager: The manager object responsible for handling the active `URLSessionDataTask`'s.
+    ///   - cache: The cache object used to store downloaded images that will be reused later.
+    func loadImage(from urlAddress: String,
+                   fallbackImage: FallbackImage = .init(),
+                   tasksManager: URLSessionDataTaskHandler = URLSessionDataTasksManager.shared,
+                   cache: Cacheable = ImageCache.shared)
+    {
+        tasksManager.cancelTask(for: hash)
         guard let url = URL(string: urlAddress) else {
             setFallbackImage(fallbackImage)
             return
         }
-        loadImage(from: url, fallbackImage: fallbackImage)
+        loadImage(from: url, fallbackImage: fallbackImage, cache: cache)
     }
 
     /// Load an image from an URL and show an activity indicator while the image is being downloaded.
     /// - Parameters:
     ///   - url: The desired URL.
     ///   - fallbackType: The fallback image to be used if the desired image is not downloaded.
-    func loadImage(from url: URL?, fallbackImage: FallbackImage = .init()) {
-        URLSessionDataTaskHandler.shared.sessions[hash]?.cancel()
+    ///   - tasksManager: The manager object responsible for handling the active `URLSessionDataTask`'s.
+    ///   - cache: The cache object used to store downloaded images that will be reused later.
+    func loadImage(from url: URL?,
+                   fallbackImage: FallbackImage = .init(),
+                   tasksManager: URLSessionDataTaskHandler = URLSessionDataTasksManager.shared,
+                   cache: Cacheable)
+    {
+        tasksManager.cancelTask(for: hash)
         guard let url = url else {
             setFallbackImage(fallbackImage)
             return
         }
 
-        ImageCache.shared.object(forKey: NSString(string: url.absoluteString)) { [weak self] cachedImage in
+        cache.object(forKey: NSString(string: url.absoluteString)) { [weak self] cachedImage in
             if let cachedImage = cachedImage {
                 self?.setImage(cachedImage)
                 return
@@ -63,12 +75,12 @@ public extension UIImageView {
                 self?.stopLoading(&activityIndicatorView)
                 if let image = UIImage(data: data) {
                     self?.setImage(image)
-                    ImageCache.shared.setObject(image, forKey: NSString(string: url.absoluteString))
+                    cache.setObject(image, forKey: NSString(string: url.absoluteString))
                 } else {
                     self?.setFallbackImage(fallbackImage)
                 }
             }
-            URLSessionDataTaskHandler.shared.sessions[self?.hash ?? .zero] = task
+            tasksManager.addTask(task, for: self?.hash ?? .zero)
             task.resume()
         }
     }
