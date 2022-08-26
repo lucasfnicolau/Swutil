@@ -9,9 +9,6 @@ import UIKit
 
 public extension UIStackView {
     func addArrangedSubviews(_ arrangedSubviews: [UIView]) {
-        arrangedSubviews.forEach {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            addArrangedSubview($0)
-        }
+        arrangedSubviews.forEach { addArrangedSubview($0) }
     }
 }

@@ -9,6 +9,11 @@ import UIKit
 
 public extension UIView {
 
+    /// `Enum` defining the different possible distances for constraints.
+    ///
+    ///     equalTo
+    ///     lessThanOrEqualTo
+    ///     greaterThanOrEqualTo
     enum ConstraintDistance {
         case equalTo
         case lessThanOrEqualTo
@@ -33,6 +38,24 @@ public extension UIView {
         return self
     }
 
+    /// Constraint the current view topAnchor with the specified view topAnchor.
+    /// - Parameters:
+    ///   - view: The view to be used as reference.
+    ///   - constant: A custom constant to be used in the constraints.
+    ///   - distance: Enum controlling if the constraint should be equalTo, lessThanOrEqualTo or greaterThanOrEqualTo the anchor.
+    @discardableResult
+    func top(to view: UIView, constant: CGFloat = .zero, distance: ConstraintDistance = .equalTo) -> Self {
+        switch distance {
+        case .equalTo:
+            topAnchor.constraint(equalTo: view.topAnchor, constant: constant).isActive = true
+        case .greaterThanOrEqualTo:
+            topAnchor.constraint(greaterThanOrEqualTo: view.topAnchor, constant: constant).isActive = true
+        case .lessThanOrEqualTo:
+            topAnchor.constraint(lessThanOrEqualTo: view.topAnchor, constant: constant).isActive = true
+        }
+        return self
+    }
+
     /// Constraint the current view leadingAnchor with the anchor received by parameter.
     /// - Parameters:
     ///   - anchor: The layout anchor to be used as reference.
@@ -47,6 +70,24 @@ public extension UIView {
             leadingAnchor.constraint(greaterThanOrEqualTo: anchor, constant: constant).isActive = true
         case .lessThanOrEqualTo:
             leadingAnchor.constraint(lessThanOrEqualTo: anchor, constant: constant).isActive = true
+        }
+        return self
+    }
+
+    /// Constraint the current view leadingAnchor with the specified view leadingAnchor.
+    /// - Parameters:
+    ///   - view: The view to be used as reference.
+    ///   - constant: A custom constant to be used in the constraints.
+    ///   - distance: Enum controlling if the constraint should be equalTo, lessThanOrEqualTo or greaterThanOrEqualTo the anchor.
+    @discardableResult
+    func leading(to view: UIView, constant: CGFloat = .zero, distance: ConstraintDistance = .equalTo) -> Self {
+        switch distance {
+        case .equalTo:
+            leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constant).isActive = true
+        case .greaterThanOrEqualTo:
+            leadingAnchor.constraint(greaterThanOrEqualTo: view.leadingAnchor, constant: constant).isActive = true
+        case .lessThanOrEqualTo:
+            leadingAnchor.constraint(lessThanOrEqualTo: view.leadingAnchor, constant: constant).isActive = true
         }
         return self
     }
@@ -69,6 +110,24 @@ public extension UIView {
         return self
     }
 
+    /// Constraint the current view trailingAnchor with the specified view trailingAnchor.
+    /// - Parameters:
+    ///   - view: The view to be used as reference.
+    ///   - constant: A custom constant to be used in the constraints.
+    ///   - distance: Enum controlling if the constraint should be equalTo, lessThanOrEqualTo or greaterThanOrEqualTo the anchor.
+    @discardableResult
+    func trailing(to view: UIView, constant: CGFloat = .zero, distance: ConstraintDistance = .equalTo) -> Self {
+        switch distance {
+        case .equalTo:
+            trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: constant).isActive = true
+        case .greaterThanOrEqualTo:
+            trailingAnchor.constraint(greaterThanOrEqualTo: view.trailingAnchor, constant: constant).isActive = true
+        case .lessThanOrEqualTo:
+            trailingAnchor.constraint(lessThanOrEqualTo: view.trailingAnchor, constant: constant).isActive = true
+        }
+        return self
+    }
+
     /// Constraint the current view bottomAnchor with the anchor received by parameter.
     /// - Parameters:
     ///   - anchor: The layout anchor to be used as reference.
@@ -83,6 +142,24 @@ public extension UIView {
             bottomAnchor.constraint(greaterThanOrEqualTo: anchor, constant: constant).isActive = true
         case .lessThanOrEqualTo:
             bottomAnchor.constraint(lessThanOrEqualTo: anchor, constant: constant).isActive = true
+        }
+        return self
+    }
+
+    /// Constraint the current view bottomAnchor with the specified view bottomAnchor.
+    /// - Parameters:
+    ///   - view: The view to be used as reference.
+    ///   - constant: A custom constant to be used in the constraints.
+    ///   - distance: Enum controlling if the constraint should be equalTo, lessThanOrEqualTo or greaterThanOrEqualTo the anchor.
+    @discardableResult
+    func bottom(to view: UIView, constant: CGFloat = .zero, distance: ConstraintDistance = .equalTo) -> Self {
+        switch distance {
+        case .equalTo:
+            bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: constant).isActive = true
+        case .greaterThanOrEqualTo:
+            bottomAnchor.constraint(greaterThanOrEqualTo: view.bottomAnchor, constant: constant).isActive = true
+        case .lessThanOrEqualTo:
+            bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: constant).isActive = true
         }
         return self
     }
