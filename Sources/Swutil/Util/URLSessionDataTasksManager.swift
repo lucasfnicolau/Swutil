@@ -18,5 +18,6 @@ public class URLSessionDataTasksManager: URLSessionDataTaskHandler {
 
     public func cancelTask(for hash: Int) {
         tasks[hash]?.cancel()
+        tasks.removeValue(forKey: hash)
     }
 }

@@ -62,26 +62,29 @@ public extension UIImageView {
                 self?.setImage(cachedImage)
                 return
             }
-        }
 
-        startLoading { [weak self] activityIndicatorView in
-            let task = URLSession.shared.dataTask(with: url) { [weak self, weak activityIndicatorView] data, _, error in
-                guard let data = data, error == nil else {
+            self?.startLoading { [weak self] activityIndicatorView in
+                let task = URLSession.shared.dataTask(with: url) { [weak self, weak activityIndicatorView] data, _, error in
+
+                    tasksManager.cancelTask(for: self?.hash ?? .zero)
+
+                    guard let data = data, error == nil else {
+                        self?.stopLoading(&activityIndicatorView)
+                        self?.setFallbackImage(fallbackImage)
+                        return
+                    }
+
                     self?.stopLoading(&activityIndicatorView)
-                    self?.setFallbackImage(fallbackImage)
-                    return
+                    if let image = UIImage(data: data) {
+                        self?.setImage(image)
+                        cache.setObject(image, forKey: NSString(string: url.absoluteString))
+                    } else {
+                        self?.setFallbackImage(fallbackImage)
+                    }
                 }
-
-                self?.stopLoading(&activityIndicatorView)
-                if let image = UIImage(data: data) {
-                    self?.setImage(image)
-                    cache.setObject(image, forKey: NSString(string: url.absoluteString))
-                } else {
-                    self?.setFallbackImage(fallbackImage)
-                }
+                tasksManager.addTask(task, for: self?.hash ?? .zero)
+                task.resume()
             }
-            tasksManager.addTask(task, for: self?.hash ?? .zero)
-            task.resume()
         }
     }
 
