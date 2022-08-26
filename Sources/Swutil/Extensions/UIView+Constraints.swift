@@ -15,206 +15,206 @@ public extension UIView {
         case greaterThanOrEqualTo
     }
 
-    @discardableResult
     /// Constraint the current view topAnchor with the anchor received by parameter.
     /// - Parameters:
     ///   - anchor: The layout anchor to be used as reference.
     ///   - constant: A custom constant to be used in the constraints.
     ///   - distance: Enum controlling if the constraint should be equalTo, lessThanOrEqualTo or greaterThanOrEqualTo the anchor.
+    @discardableResult
     func top(to anchor: NSLayoutAnchor<NSLayoutYAxisAnchor>, constant: CGFloat = .zero, distance: ConstraintDistance = .equalTo) -> Self {
         switch distance {
         case .equalTo:
-            self.topAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
+            topAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
         case .greaterThanOrEqualTo:
-            self.topAnchor.constraint(greaterThanOrEqualTo: anchor, constant: constant).isActive = true
+            topAnchor.constraint(greaterThanOrEqualTo: anchor, constant: constant).isActive = true
         case .lessThanOrEqualTo:
-            self.topAnchor.constraint(lessThanOrEqualTo: anchor, constant: constant).isActive = true
+            topAnchor.constraint(lessThanOrEqualTo: anchor, constant: constant).isActive = true
         }
         return self
     }
 
-    @discardableResult
     /// Constraint the current view leadingAnchor with the anchor received by parameter.
     /// - Parameters:
     ///   - anchor: The layout anchor to be used as reference.
     ///   - constant: A custom constant to be used in the constraints.
     ///   - distance: Enum controlling if the constraint should be equalTo, lessThanOrEqualTo or greaterThanOrEqualTo the anchor.
+    @discardableResult
     func leading(to anchor: NSLayoutAnchor<NSLayoutXAxisAnchor>, constant: CGFloat = .zero, distance: ConstraintDistance = .equalTo) -> Self {
         switch distance {
         case .equalTo:
-            self.leadingAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
+            leadingAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
         case .greaterThanOrEqualTo:
-            self.leadingAnchor.constraint(greaterThanOrEqualTo: anchor, constant: constant).isActive = true
+            leadingAnchor.constraint(greaterThanOrEqualTo: anchor, constant: constant).isActive = true
         case .lessThanOrEqualTo:
-            self.leadingAnchor.constraint(lessThanOrEqualTo: anchor, constant: constant).isActive = true
+            leadingAnchor.constraint(lessThanOrEqualTo: anchor, constant: constant).isActive = true
         }
         return self
     }
 
-    @discardableResult
     /// Constraint the current view trailingAnchor with the anchor received by parameter.
     /// - Parameters:
     ///   - anchor: The layout anchor to be used as reference.
     ///   - constant: A custom constant to be used in the constraints.
     ///   - distance: Enum controlling if the constraint should be equalTo, lessThanOrEqualTo or greaterThanOrEqualTo the anchor.
+    @discardableResult
     func trailing(to anchor: NSLayoutAnchor<NSLayoutXAxisAnchor>, constant: CGFloat = .zero, distance: ConstraintDistance = .equalTo) -> Self {
         switch distance {
         case .equalTo:
-            self.trailingAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
+            trailingAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
         case .greaterThanOrEqualTo:
-            self.trailingAnchor.constraint(greaterThanOrEqualTo: anchor, constant: constant).isActive = true
+            trailingAnchor.constraint(greaterThanOrEqualTo: anchor, constant: constant).isActive = true
         case .lessThanOrEqualTo:
-            self.trailingAnchor.constraint(lessThanOrEqualTo: anchor, constant: constant).isActive = true
+            trailingAnchor.constraint(lessThanOrEqualTo: anchor, constant: constant).isActive = true
         }
         return self
     }
 
-    @discardableResult
     /// Constraint the current view bottomAnchor with the anchor received by parameter.
     /// - Parameters:
     ///   - anchor: The layout anchor to be used as reference.
     ///   - constant: A custom constant to be used in the constraints.
     ///   - distance: Enum controlling if the constraint should be equalTo, lessThanOrEqualTo or greaterThanOrEqualTo the anchor.
+    @discardableResult
     func bottom(to anchor: NSLayoutAnchor<NSLayoutYAxisAnchor>, constant: CGFloat = .zero, distance: ConstraintDistance = .equalTo) -> Self {
         switch distance {
         case .equalTo:
-            self.bottomAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
+            bottomAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
         case .greaterThanOrEqualTo:
-            self.bottomAnchor.constraint(greaterThanOrEqualTo: anchor, constant: constant).isActive = true
+            bottomAnchor.constraint(greaterThanOrEqualTo: anchor, constant: constant).isActive = true
         case .lessThanOrEqualTo:
-            self.bottomAnchor.constraint(lessThanOrEqualTo: anchor, constant: constant).isActive = true
+            bottomAnchor.constraint(lessThanOrEqualTo: anchor, constant: constant).isActive = true
         }
         return self
     }
 
-    @discardableResult
     /// Constraint the current view centerY and centerX anchors with the anchor received by parameter.
     /// - Parameters:
     ///   - view: The view to be used as reference.
+    @discardableResult
     func center(to view: UIView) -> Self {
-        self.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        self.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         return self
     }
 
-    @discardableResult
     /// Constraint the current view centerYAnchor with the anchor received by parameter.
     /// - Parameters:
     ///   - view: The view to be used as reference.
     ///   - constant: A custom constant to be used in the constraints.
+    @discardableResult
     func centerY(to view: UIView, constant: CGFloat = .zero) -> Self {
-        self.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: constant).isActive = true
+        centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: constant).isActive = true
         return self
     }
 
-    @discardableResult
     /// Constraint the current view centerXAnchor with the anchor received by parameter.
     /// - Parameters:
     ///   - view: The view to be used as reference.
     ///   - constant: A custom constant to be used in the constraints.
+    @discardableResult
     func centerX(to view: UIView, constant: CGFloat = .zero) -> Self {
-        self.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: constant).isActive = true
+        centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: constant).isActive = true
         return self
     }
 
+    /// Constraint all the four main anchors (top, leading, trailing and bottom) of the current view with the anchor received by paremeter.
+    /// - Parameters:
+    ///   - view: The view where the constraint should be applied to.
+    ///   - usingSafeArea: Boolean controlling the use of the safe area when applying the constraints.
+    ///   - constant: A custom constant to be used in the constraints.
     @discardableResult
-  /// Constraint all the four main anchors (top, leading, trailing and bottom) of the current view with the anchor received by paremeter.
-  /// - Parameters:
-  ///   - view: The view where the constraint should be applied to.
-  ///   - usingSafeArea: Boolean controlling the use of the safe area when applying the constraints.
-  ///   - constant: A custom constant to be used in the constraints.
-    func constraint(to view: UIView, usingSafeArea: Bool = false, constant: CGFloat = .zero) -> Self {
+    func snap(to view: UIView, usingSafeArea: Bool = false, constant: CGFloat = .zero) -> Self {
         if (usingSafeArea) {
             NSLayoutConstraint.activate([
-                self.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: constant),
-                self.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: constant),
-                self.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -constant),
-                self.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -constant)
+                topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: constant),
+                leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: constant),
+                trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -constant),
+                bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -constant)
             ])
         } else {
             NSLayoutConstraint.activate([
-                self.topAnchor.constraint(equalTo: view.topAnchor, constant: constant),
-                self.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constant),
-                self.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constant),
-                self.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -constant)
+                topAnchor.constraint(equalTo: view.topAnchor, constant: constant),
+                leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constant),
+                trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -constant),
+                bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -constant)
             ])
         }
         return self
     }
 
-    @discardableResult
     /// Constraint the height and width anchors with the specified CGSize value.
     /// - Parameters:
     ///   - size: The size be used as the constraint constant.
+    @discardableResult
     func size(to size: CGSize) -> Self {
-        self.widthAnchor.constraint(equalToConstant: size.width).isActive = true
-        self.heightAnchor.constraint(equalToConstant: size.height).isActive = true
+        widthAnchor.constraint(equalToConstant: size.width).isActive = true
+        heightAnchor.constraint(equalToConstant: size.height).isActive = true
         return self
     }
 
-    @discardableResult
     /// Constraint the height and width anchors with the specified CGFloat value.
     /// - Parameters:
     ///   - constant: The value to be used as the constraint constant.
+    @discardableResult
     func size(to constant: CGFloat) -> Self {
-        self.widthAnchor.constraint(equalToConstant: constant).isActive = true
-        self.heightAnchor.constraint(equalToConstant: constant).isActive = true
+        widthAnchor.constraint(equalToConstant: constant).isActive = true
+        heightAnchor.constraint(equalToConstant: constant).isActive = true
         return self
     }
 
-    @discardableResult
     /// Constraint the widthAnchor with the specified CGFloat value.
     /// - Parameters:
     ///   - constant: The value be used as the constraint constant.
+    @discardableResult
     func width(to constant: CGFloat) -> Self {
-        self.widthAnchor.constraint(equalToConstant: constant).isActive = true
+        widthAnchor.constraint(equalToConstant: constant).isActive = true
         return self
     }
 
-    @discardableResult
     /// Constraint the widthAnchor with the specified anchor.
     /// - Parameters:
     ///   - anchor: The layout anchor to be used as reference.
+    @discardableResult
     func width(to anchor: NSLayoutAnchor<NSLayoutDimension>) -> Self {
-        self.widthAnchor.constraint(equalTo: anchor).isActive = true
+        widthAnchor.constraint(equalTo: anchor).isActive = true
         return self
     }
 
-    @discardableResult
     /// Constraint the widthAnchor with the specified anchor.
     /// - Parameters:
     ///   - anchor: The layout anchor to be used as reference.
     ///   - multiplier: Factor value to be applied to the constraint.
+    @discardableResult
     func width(to anchor: NSLayoutDimension, multiplier: CGFloat = 1.0) -> Self {
-        self.widthAnchor.constraint(equalTo: anchor, multiplier: multiplier).isActive = true
+        widthAnchor.constraint(equalTo: anchor, multiplier: multiplier).isActive = true
         return self
     }
 
-    @discardableResult
     /// Constraint the heightAnchor with the specified CGFloat value.
     /// - Parameters:
     ///   - constant: The value be used as the constraint constant.
+    @discardableResult
     func height(to constant: CGFloat) -> Self {
-        self.heightAnchor.constraint(equalToConstant: constant).isActive = true
+        heightAnchor.constraint(equalToConstant: constant).isActive = true
         return self
     }
 
-    @discardableResult
     /// Constraint the heightAnchor with the specified anchor.
     /// - Parameters:
     ///   - anchor: The layout anchor to be used as reference.
+    @discardableResult
     func height(to anchor: NSLayoutAnchor<NSLayoutDimension>) -> Self {
-        self.heightAnchor.constraint(equalTo: anchor).isActive = true
+        heightAnchor.constraint(equalTo: anchor).isActive = true
         return self
     }
 
-    @discardableResult
     /// Constraint the heightAnchor with the specified anchor.
     /// - Parameters:
     ///   - anchor: The layout anchor to be used as reference.
     ///   - multiplier: Factor value to be applied to the constraint.
+    @discardableResult
     func height(to anchor: NSLayoutDimension, multiplier: CGFloat = 1.0) -> Self {
-        self.heightAnchor.constraint(equalTo: anchor, multiplier: multiplier).isActive = true
+        heightAnchor.constraint(equalTo: anchor, multiplier: multiplier).isActive = true
         return self
     }
 }
