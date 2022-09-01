@@ -18,7 +18,7 @@ public extension UITableView {
         register(cellCass, forCellReuseIdentifier: cellCass.reuseIdentifier)
     }
 
-    func deque<Cell: UITableViewCell>(_ cell: Cell.Type, for indexPath: IndexPath) -> Cell? {
+    func dequeue<Cell: UITableViewCell>(_ cell: Cell.Type, for indexPath: IndexPath) -> Cell? {
         dequeueReusableCell(withIdentifier: cell.reuseIdentifier, for: indexPath) as? Cell
     }
 }
@@ -34,7 +34,7 @@ public extension UICollectionView {
         register(cellCass, forCellWithReuseIdentifier: cellCass.reuseIdentifier)
     }
 
-    func deque<Cell: UICollectionViewCell>(_ cell: Cell.Type, for indexPath: IndexPath) -> Cell? {
+    func dequeue<Cell: UICollectionViewCell>(_ cell: Cell.Type, for indexPath: IndexPath) -> Cell? {
         dequeueReusableCell(withReuseIdentifier: cell.reuseIdentifier, for: indexPath) as? Cell
     }
 }
